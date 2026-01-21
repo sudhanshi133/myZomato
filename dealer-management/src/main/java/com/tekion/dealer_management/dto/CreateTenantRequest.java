@@ -1,5 +1,6 @@
 package com.tekion.dealer_management.dto;
 
+import com.tekion.dealer_management.model.DbType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateTenantRequest {
-    private String tenantId;
+    public String tenantId;
+    public DbType dbType;
 }
 

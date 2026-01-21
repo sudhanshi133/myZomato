@@ -26,7 +26,7 @@ public class DealerController {
     @PostMapping
     public ResponseEntity<?> createDealer(@RequestBody CreateDealerRequest request) {
         try {
-            Dealer dealer = dealerService.createDealer(request.getDealerId());
+            Dealer dealer = dealerService.createDealer(request.dealerId);
             return ResponseEntity.status(HttpStatus.CREATED).body(dealer);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -46,7 +46,7 @@ public class DealerController {
     @PostMapping("/{dealerId}/tenants")
     public ResponseEntity<?> createTenant(@PathVariable String dealerId, @RequestBody CreateTenantRequest request) {
         try {
-            Tenant tenant = tenantService.createTenant(request.getTenantId(), dealerId);
+            Tenant tenant = tenantService.createTenant(request.tenantId, dealerId, request.dbType);
             return ResponseEntity.status(HttpStatus.CREATED).body(tenant);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
