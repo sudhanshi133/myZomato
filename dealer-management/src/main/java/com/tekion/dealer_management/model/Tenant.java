@@ -29,5 +29,9 @@ public class Tenant {
         this.dbConnection = null;
         this.createdAt = Instant.now();
     }
+
+    public void setDbConnection(String dbConnection) {
+        this.dbConnection = dbConnection;
+    }
 }
 

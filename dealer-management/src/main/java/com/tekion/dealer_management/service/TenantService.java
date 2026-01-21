@@ -26,6 +26,12 @@ public class TenantService {
         }
         DbType finalDbType = dbType != null ? dbType : DbType.SHARED;
         Tenant tenant = new Tenant(tenantId, dealerId, finalDbType);
+
+        if (finalDbType == DbType.DEDICATED) {
+            String dbConnection = "mongodb://localhost:27017/tenant_" + tenantId + "_db";
+            tenant.setDbConnection(dbConnection);
+        }
+
         return tenantRepository.save(tenant);
     }
 
