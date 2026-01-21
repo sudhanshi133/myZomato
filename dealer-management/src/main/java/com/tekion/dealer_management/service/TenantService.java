@@ -1,5 +1,6 @@
 package com.tekion.dealer_management.service;
 
+import com.tekion.dealer_management.model.DbType;
 import com.tekion.dealer_management.model.Tenant;
 import com.tekion.dealer_management.repository.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,15 @@ public class TenantService {
     @Autowired
     private DealerService dealerService;
     
-    public Tenant createTenant(String tenantId, String dealerId) {
+    public Tenant createTenant(String tenantId, String dealerId, DbType dbType) {
         if (!dealerService.dealerExists(dealerId)) {
             throw new IllegalArgumentException("Dealer with ID '" + dealerId + "' not found");
         }
         if (tenantRepository.existsById(tenantId)) {
             throw new IllegalArgumentException("Tenant with ID '" + tenantId + "' already exists");
         }
-        Tenant tenant = new Tenant(tenantId, dealerId);
+        DbType finalDbType = dbType != null ? dbType : DbType.SHARED;
+        Tenant tenant = new Tenant(tenantId, dealerId, finalDbType);
         return tenantRepository.save(tenant);
     }
 

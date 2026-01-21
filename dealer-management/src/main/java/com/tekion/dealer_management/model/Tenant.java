@@ -18,6 +18,16 @@ public class Tenant {
     @Field("_id")
     private String id;
     private String dealerId;
+    private DbType dbType;
+    private String dbConnection;
     private Instant createdAt;
+
+    public Tenant(String id, String dealerId, DbType dbType) {
+        this.id = id;
+        this.dealerId = dealerId;
+        this.dbType = dbType != null ? dbType : DbType.SHARED;
+        this.dbConnection = null;
+        this.createdAt = Instant.now();
+    }
 }
 

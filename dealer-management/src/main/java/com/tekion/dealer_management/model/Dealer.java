@@ -18,5 +18,10 @@ public class Dealer {
     @Field("_id")
     private String id;
     private Instant createdAt;
+
+    public Dealer(String id) {
+        this.id = id;
+        this.createdAt = Instant.now();
+    }
 }
 
